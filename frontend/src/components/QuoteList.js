@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography, Grid, Grow } from "@mui/material";
 
 const QuoteList = () => {
-  const [quotes, setQuotes] = useState([]); // Initialize as empty array
+  const [quotes, setQuotes] = useState([]);
 
   const fetchData = () => {
     setQuotes(null);
     fetch("http://localhost:8080/", {
       method: "GET",
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((data) => {

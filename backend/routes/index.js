@@ -2,6 +2,7 @@ const { randomInt } = require("crypto");
 
 const express = require("express");
 const connectDB = require("../db");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -63,7 +64,7 @@ connectDB()
  *            type: array
  */
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
     const [results] = await db.query("SELECT * FROM quote");
     res.status(200).json(results);
